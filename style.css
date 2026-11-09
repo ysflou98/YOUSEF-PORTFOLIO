@@ -137,8 +137,11 @@ a:hover { color: var(--ink); }
   .main-nav { order: 0; width: auto; margin-left: auto; }
 }
 
-/* ---------- Hero ---------- */
-.hero { padding-block: clamp(2.5rem, 7vw, 5.5rem); }
+/* ---------- Hero (con la Y 3D che si compone scrollando) ---------- */
+.site-header { position: relative; z-index: 10; }
+.hero { padding-block: clamp(2.5rem, 7vw, 5rem); overflow: clip; }
+.hero-grid { display: grid; gap: 2.5rem; align-items: start; }
+.hero-copy { position: relative; z-index: 2; }
 .status {
   display: inline-flex;
   align-items: center;
@@ -159,23 +162,17 @@ a:hover { color: var(--ink); }
 }
 .lead { font-size: 1.2rem; color: var(--ink-soft); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; margin-top: 2rem; }
+.y-hint { display: none; margin-top: 2rem; font-weight: 600; color: var(--deep); }
 
-/* ---------- Y 3D che si compone scrollando ---------- */
-.y-scene { background: var(--ink); color: var(--tint); }
-.y-scene h2 { color: var(--bg); }
-.y-sticky { padding-block: clamp(3rem, 7vw, 5rem); }
-.y-grid { display: grid; gap: 2rem; align-items: center; }
-.y-copy p { color: var(--line); font-size: 1.1rem; }
-.y-hint { display: none; margin-top: 1.5rem; font-weight: 600; color: var(--line); }
-
+.y-track { position: relative; }
 .y3d {
   position: relative;
   width: min(100%, 400px);
   aspect-ratio: 1;
-  justify-self: center;
+  margin-inline: auto;
   perspective: 1200px;
 }
-.y3d-fallback { width: 100%; height: 100%; display: block; color: var(--line); --face: var(--deep); }
+.y3d-fallback { width: 100%; height: 100%; display: block; color: var(--ink); --face: var(--line); }
 .y3d-model { display: none; }
 .y3d.has-3d .y3d-fallback { display: none; }
 .y3d.has-3d .y3d-model { display: block; }
@@ -215,30 +212,33 @@ a:hover { color: var(--ink); }
     translate(0, 37px) rotate(calc((1 - var(--l)) * 90deg));
 }
 
-/* Attiva lo scroll "appiccicato" solo quando lo script è pronto */
-.y-scene.is-live { height: 320vh; }
-.y-scene.is-live .y-sticky {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  padding-block: 0;
-  display: grid;
-  align-items: center;
-  overflow: hidden;
-  overflow: clip;
-}
-.y-scene.is-live .y-hint { display: block; }
+/* Attivo solo quando lo script è pronto: la Y resta ferma mentre scorri */
+.hero.is-live .y-track { height: 300vh; }
+.hero.is-live .y3d { position: sticky; top: max(1rem, calc((100vh - 400px) / 2)); }
+.hero.is-live .y-hint { display: block; }
 
 @media (min-width: 820px) {
-  .y-grid { grid-template-columns: 1fr 1fr; gap: 4rem; }
+  .hero-grid { grid-template-columns: 1.5fr 1fr; gap: 3rem; }
+  .hero.is-live .hero-copy { position: sticky; top: 6rem; }
 }
 @media (max-width: 819px) {
   .y3d { width: min(100%, 300px); --s: 0.62; }
+  .hero.is-live .y-track { height: 260vh; }
+  .hero.is-live .y3d { top: max(1rem, calc((100vh - 300px) / 2)); }
 }
 
 /* ---------- Sezioni ---------- */
 .section { padding-block: clamp(3rem, 7vw, 5.5rem); scroll-margin-top: 1rem; }
 .section--band { background: var(--tint); border-block: 2px solid var(--ink); }
+.section--dark { background: var(--ink); color: var(--tint); }
+.section--dark h2 { color: var(--bg); }
+.section--dark .card { color: var(--ink); }
+.section--dark :focus-visible { outline-color: var(--line); }
+.section--dark .carousel-slide { border-color: var(--line); box-shadow: 0 5px 0 var(--mid); }
+.section--dark .carousel-controls .key { border-color: var(--bg); box-shadow: 0 3px 0 var(--mid); }
+.section--dark .carousel-controls .key:active { box-shadow: 0 0 0 var(--mid); }
+.section--dark .carousel-controls .key:disabled:active { box-shadow: 0 3px 0 var(--mid); }
+.section--dark .carousel-count { color: var(--tint); }
 .section-intro { color: var(--ink-soft); font-size: 1.1rem; margin-bottom: 2.5rem; }
 
 .grid { display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); list-style: none; }

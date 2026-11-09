@@ -18,12 +18,13 @@
   /* ---------- Y 3D che si compone scrollando ---------- */
   var host = document.getElementById("y3d");
   var scene = document.getElementById("y-scene");
+  var yTrack = document.getElementById("y-track");
   var model = host && host.querySelector(".y3d-model");
 
-  if (host && scene && model) {
+  if (host && scene && yTrack && model) {
     // Ogni pezzo è una pila di strati arrotondati (estrusione).
     var PARTS = [
-      { cls: "p-base",  w: 276, h: 276, r: 56, z0: 0,  z1: 20, n: 10, color: "#4C956C", top: "#4C956C" },
+      { cls: "p-base",  w: 276, h: 276, r: 56, z0: 0,  z1: 20, n: 10, color: "#0F3D2E", top: "#0F3D2E" },
       { cls: "p-body",  w: 236, h: 236, r: 46, z0: 20, z1: 62, n: 16, color: "#166534", top: "#A8D5BA" },
       { cls: "p-arm-l", w: 16,  h: 90,  r: 7,  z0: 62, z1: 76, n: 6,  color: "#0F3D2E", top: "#0F3D2E" },
       { cls: "p-arm-r", w: 16,  h: 90,  r: 7,  z0: 62, z1: 76, n: 6,  color: "#0F3D2E", top: "#0F3D2E" },
@@ -67,9 +68,10 @@
 
       var update = function () {
         ticking = false;
-        var rect = scene.getBoundingClientRect();
-        var total = scene.offsetHeight - window.innerHeight;
-        var p = total > 0 ? -rect.top / total : 1;
+        var rect = yTrack.getBoundingClientRect();
+        var total = yTrack.offsetHeight - window.innerHeight;
+        var start = window.innerHeight * 0.12;
+        var p = total > 0 ? (start - rect.top) / (total + start) : 1;
         p = Math.min(1, Math.max(0, p));
         model.style.setProperty("--p", p.toFixed(4));
       };
