@@ -161,11 +161,12 @@ a:hover { color: var(--ink); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; margin-top: 2rem; }
 
 /* ---------- Y 3D che si compone scrollando ---------- */
-.y-scene { border-top: 2px solid var(--ink); }
+.y-scene { background: var(--ink); color: var(--tint); }
+.y-scene h2 { color: var(--bg); }
 .y-sticky { padding-block: clamp(3rem, 7vw, 5rem); }
 .y-grid { display: grid; gap: 2rem; align-items: center; }
-.y-copy p { color: var(--ink-soft); font-size: 1.1rem; }
-.y-hint { display: none; margin-top: 1.5rem; font-weight: 600; color: var(--deep); }
+.y-copy p { color: var(--line); font-size: 1.1rem; }
+.y-hint { display: none; margin-top: 1.5rem; font-weight: 600; color: var(--line); }
 
 .y3d {
   position: relative;
@@ -174,7 +175,7 @@ a:hover { color: var(--ink); }
   justify-self: center;
   perspective: 1200px;
 }
-.y3d-fallback { width: 100%; height: 100%; display: block; color: var(--ink); --face: var(--line); }
+.y3d-fallback { width: 100%; height: 100%; display: block; color: var(--line); --face: var(--deep); }
 .y3d-model { display: none; }
 .y3d.has-3d .y3d-fallback { display: none; }
 .y3d.has-3d .y3d-model { display: block; }
@@ -262,6 +263,35 @@ a:hover { color: var(--ink); }
   border-bottom: 3px solid var(--deep);
   transform: rotate(-45deg) translateY(-50%);
 }
+
+/* ---------- Carosello ---------- */
+.carousel-track {
+  position: relative;
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0 -0.25rem;
+  padding: 0.25rem 0.25rem 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--mid) transparent;
+}
+.carousel-slide {
+  flex: 0 0 min(86%, 440px);
+  scroll-snap-align: start;
+  min-height: 12rem;
+  box-shadow: 0 5px 0 var(--ink);
+}
+.carousel-slide h3 { font-size: 1.6rem; }
+.carousel-controls { display: flex; align-items: center; gap: 1rem; margin-top: 0.5rem; }
+.carousel-controls[hidden] { display: none; }
+.carousel-controls .key { padding: 0.5rem 0.8rem; }
+.carousel-controls svg { width: 1.2rem; height: 1.2rem; display: block; }
+.carousel-count { font-weight: 700; min-width: 3.5rem; text-align: center; }
+.key:disabled { opacity: 0.4; cursor: default; }
+.key:disabled:hover { background: var(--bg); color: var(--ink); }
+.key:disabled:active { transform: none; box-shadow: 0 3px 0 var(--ink); }
 
 /* ---------- Progetti ---------- */
 .projects { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
