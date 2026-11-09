@@ -9,7 +9,7 @@
   <link rel="alternate" hreflang="it" href="https://yousefloulid.it/">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <meta name="author" content="Yousef Loulid">
-  <meta name="theme-color" content="#f2f5f4">
+  <meta name="theme-color" content="#F9FCF8">
   <meta name="geo.region" content="IT-LT">
   <meta name="geo.placename" content="Terracina">
   <meta name="geo.position" content="41.2917;13.2459">
@@ -133,8 +133,16 @@
 
   <header class="site-header">
     <div class="container header-inner">
-      <a class="brand" href="/" aria-label="Yousef Loulid – Home">
-        <svg class="brand-logo" aria-hidden="true" focusable="false"><use href="#logo"/></svg>
+      <a class="brand" href="/" aria-label="Yousef Loulid – Home (premi la Y per tornare alla home)">
+        <svg class="brand-logo brand-logo--key" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <g fill="none" stroke="currentColor" stroke-linejoin="round">
+            <path d="M10 62V76a18 18 0 0 0 18 18H72a18 18 0 0 0 18-18V62" stroke-width="6"/>
+            <g class="key-face">
+              <rect class="logo-face" x="10" y="8" width="80" height="70" rx="20" stroke-width="6"/>
+              <path d="M34 28L50 52L66 28M50 52V68" stroke-width="5" stroke-linecap="square"/>
+            </g>
+          </g>
+        </svg>
         <span>Yousef Loulid</span>
       </a>
       <a class="key key--small" href="#contatti">Scrivimi</a>
@@ -154,7 +162,7 @@
 
   <main id="contenuto">
     <section class="hero" aria-labelledby="titolo-hero">
-      <div class="container hero-grid">
+      <div class="container">
         <div>
           <p class="status">Disponibile per nuovi progetti</p>
           <h1 id="titolo-hero">Web designer a Terracina: siti chiari, veloci e fatti per essere trovati</h1>
@@ -164,9 +172,22 @@
             <a class="key" href="#progetti">Guarda il progetto</a>
           </div>
         </div>
-        <a class="hero-key" href="#contatti" aria-label="Scrivimi: vai al modulo contatti">
-          <svg aria-hidden="true" focusable="false" viewBox="0 0 100 100"><use href="#logo"/></svg>
-        </a>
+      </div>
+    </section>
+
+    <section class="y-scene" id="y-scene" aria-labelledby="titolo-y">
+      <div class="y-sticky">
+        <div class="container y-grid">
+          <div class="y-copy">
+            <h2 id="titolo-y">Ogni pezzo al suo posto</h2>
+            <p>Un sito ben fatto si costruisce a strati: una base solida, una struttura chiara, i dettagli nel punto giusto. Scorri e guarda il tasto comporsi.</p>
+            <p class="y-hint" aria-hidden="true">Scorri per comporlo</p>
+          </div>
+          <div class="y3d" id="y3d" role="img" aria-label="Il tasto Y del logo che si compone in 3D mentre scorri la pagina">
+            <svg class="y3d-fallback" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><use href="#logo"/></svg>
+            <div class="y3d-model"></div>
+          </div>
+        </div>
       </div>
     </section>
 
