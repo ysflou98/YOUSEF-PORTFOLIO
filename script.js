@@ -2,6 +2,17 @@
 (function () {
   "use strict";
 
+  /* ---------- Barra fissa: misura la sua altezza per ancore e parti ferme ---------- */
+  var bar = document.querySelector(".site-header");
+  if (bar) {
+    var measure = function () {
+      document.documentElement.style.setProperty("--header-h", bar.offsetHeight + "px");
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    window.addEventListener("load", measure);
+  }
+
   /* ---------- Logo: sulla home riporta in cima senza ricaricare ---------- */
   var brand = document.querySelector(".brand");
   if (brand) {
