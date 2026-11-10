@@ -112,49 +112,6 @@
     }
   }
 
-  /* ---------- Carosello "Perché lavorare con me" ---------- */
-  var car = document.getElementById("perche-carousel");
-  if (car) {
-    var track = car.querySelector(".carousel-track");
-    var slides = track.querySelectorAll(".carousel-slide");
-    var controls = car.querySelector(".carousel-controls");
-    var prev = car.querySelector('[data-dir="-1"]');
-    var next = car.querySelector('[data-dir="1"]');
-    var count = car.querySelector(".carousel-count");
-    var calm = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    controls.hidden = false;
-
-    var closest = function () {
-      var best = 0, bestDist = Infinity;
-      for (var i = 0; i < slides.length; i++) {
-        var d = Math.abs(slides[i].offsetLeft - track.scrollLeft);
-        if (d < bestDist) { bestDist = d; best = i; }
-      }
-      return best;
-    };
-    var refresh = function () {
-      var atStart = track.scrollLeft <= slides[0].offsetLeft + 2;
-      var atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 2;
-      prev.disabled = atStart;
-      next.disabled = atEnd;
-      count.textContent = (atEnd ? slides.length : closest() + 1) + " / " + slides.length;
-    };
-    var go = function (dir) {
-      var i = Math.min(slides.length - 1, Math.max(0, closest() + dir));
-      track.scrollTo({ left: slides[i].offsetLeft, behavior: calm ? "auto" : "smooth" });
-    };
-
-    prev.addEventListener("click", function () { go(-1); });
-    next.addEventListener("click", function () { go(1); });
-    var raf = false;
-    track.addEventListener("scroll", function () {
-      if (!raf) { raf = true; window.requestAnimationFrame(function () { raf = false; refresh(); }); }
-    }, { passive: true });
-    window.addEventListener("resize", refresh);
-    refresh();
-  }
-
   /* ---------- Card e form: ingresso alternato da sinistra e destra ---------- */
   (function () {
     var calmMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -167,7 +124,7 @@
         list[i].style.animationDelay = (i % 3) * 90 + "ms";
       }
     };
-    mark(".carousel-slide");
+    mark("#perche .card");
     mark("#servizi .card");
     mark(".project");
     mark(".faq details");
