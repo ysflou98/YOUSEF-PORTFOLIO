@@ -187,7 +187,7 @@
   var form = document.getElementById("contact-form");
   if (form) {
     var status = document.getElementById("form-status");
-    var TO = "hello@yousefloulid.it";
+    var TO = "ysflou98@gmail.com";
 
     form.addEventListener("submit", function (event) {
       event.preventDefault();
