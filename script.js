@@ -144,6 +144,45 @@
     refresh();
   }
 
+  /* ---------- Card e form: ingresso alternato da sinistra e destra ---------- */
+  (function () {
+    var calmMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (calmMotion || !("IntersectionObserver" in window)) return;
+
+    var mark = function (selector) {
+      var list = document.querySelectorAll(selector);
+      for (var i = 0; i < list.length; i++) {
+        list[i].setAttribute("data-reveal", i % 2 === 0 ? "left" : "right");
+        list[i].style.animationDelay = (i % 3) * 90 + "ms";
+      }
+    };
+    mark(".carousel-slide");
+    mark("#servizi .card");
+    mark(".project");
+    mark(".faq details");
+
+    var one = function (selector, side) {
+      var el = document.querySelector(selector);
+      if (el) el.setAttribute("data-reveal", side);
+    };
+    one("#contatti .contact > div", "left");
+    one("#contact-form", "right");
+
+    var targets = document.querySelectorAll("[data-reveal]");
+    document.documentElement.classList.add("js-reveal");
+
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-in");
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -6% 0px" });
+
+    for (var i = 0; i < targets.length; i++) io.observe(targets[i]);
+  })();
+
   /* ---------- Modulo contatti: apre il programma di posta ---------- */
   var form = document.getElementById("contact-form");
   if (form) {

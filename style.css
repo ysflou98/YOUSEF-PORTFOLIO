@@ -162,7 +162,6 @@ a:hover { color: var(--ink); }
 }
 .lead { font-size: 1.2rem; color: var(--ink-soft); }
 .hero-actions { display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; margin-top: 2rem; }
-.y-hint { display: none; margin-top: 2rem; font-weight: 600; color: var(--deep); }
 
 .y-track { position: relative; }
 .y3d {
@@ -215,7 +214,6 @@ a:hover { color: var(--ink); }
 /* Attivo solo quando lo script è pronto: la Y resta ferma mentre scorri */
 .hero.is-live .y-track { height: 300vh; }
 .hero.is-live .y3d { position: sticky; top: max(1rem, calc((100vh - 400px) / 2)); }
-.hero.is-live .y-hint { display: block; }
 
 @media (min-width: 820px) {
   .hero-grid { grid-template-columns: 1.5fr 1fr; gap: 3rem; }
@@ -265,13 +263,15 @@ a:hover { color: var(--ink); }
 }
 
 /* ---------- Carosello ---------- */
+main { overflow-x: clip; }
+
 .carousel-track {
   position: relative;
   display: flex;
   gap: 1.5rem;
   list-style: none;
-  margin: 0 -0.25rem;
-  padding: 0.25rem 0.25rem 1.5rem;
+  margin: -0.75rem -0.25rem 0;
+  padding: 1rem 0.25rem 1.75rem;
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   scrollbar-width: thin;
@@ -392,6 +392,26 @@ address { font-style: normal; }
 .prose h2 { font-size: 1.5rem; margin-top: 2.2rem; max-width: none; }
 .prose p, .prose li { max-width: 68ch; }
 .prose ul { padding-left: 1.3rem; margin-bottom: 1em; }
+
+/* ---------- Card: effetto al passaggio del mouse ---------- */
+.card, .project, .faq details {
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;
+}
+@media (hover: hover) {
+  .card:hover { transform: translateY(-8px); background: var(--line); box-shadow: 0 8px 0 var(--ink); }
+  .section--band .card:hover { background: var(--line); }
+  .section--dark .card:hover { box-shadow: 0 13px 0 var(--mid); }
+  .project:hover { transform: translateY(-8px); box-shadow: 0 14px 0 var(--ink); }
+  .project--next:hover { background: var(--tint); border-style: solid; box-shadow: 0 8px 0 var(--ink); }
+  .faq details:hover { transform: translateX(6px); background: var(--line); box-shadow: -6px 0 0 var(--ink); }
+}
+
+/* ---------- Ingresso alternato da sinistra e da destra ---------- */
+.js-reveal [data-reveal]:not(.is-in) { opacity: 0; }
+.js-reveal [data-reveal].is-in { animation: in-from-left 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards; }
+.js-reveal [data-reveal="right"].is-in { animation-name: in-from-right; }
+@keyframes in-from-left  { from { opacity: 0; transform: translateX(-110px); } }
+@keyframes in-from-right { from { opacity: 0; transform: translateX(110px); } }
 
 /* ---------- Movimento ridotto ---------- */
 @media (prefers-reduced-motion: reduce) {
