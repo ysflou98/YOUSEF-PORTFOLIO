@@ -171,10 +171,17 @@ a:hover { color: var(--ink); }
   aspect-ratio: 1;
   margin-inline: auto;
   perspective: 1200px;
+  --s: 0.92;
 }
-.y3d-fallback { width: 100%; height: 100%; display: block; color: var(--ink); --face: var(--line); }
+.keys-fallback { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; width: 100%; max-width: 340px; margin: 0 auto; }
+.keys-fallback li {
+  display: grid; place-items: center; aspect-ratio: 1;
+  background: var(--line); color: var(--ink);
+  border: 2px solid var(--ink); border-radius: 18px; box-shadow: 0 6px 0 var(--ink);
+  font: 800 clamp(2rem, 6vw, 3rem) var(--font-display);
+}
+.y3d.has-3d .keys-fallback { display: none; }
 .y3d-model { display: none; }
-.y3d.has-3d .y3d-fallback { display: none; }
 .y3d.has-3d .y3d-model { display: block; }
 
 .y3d-model {
@@ -188,28 +195,21 @@ a:hover { color: var(--ink); }
 .part { position: absolute; left: 0; top: 0; width: 0; height: 0; transform-style: preserve-3d; }
 .ly { position: absolute; left: 50%; top: 50%; display: block; }
 
-.p-base {
-  --l: clamp(0, calc((var(--p) - 0) / 0.22), 1);
-  transform: translate3d(0, 0, calc((1 - var(--l)) * -280px)) rotateZ(calc((1 - var(--l)) * 120deg));
+.key3d {
+  --l: clamp(0, calc((var(--p) - var(--st)) / 0.2), 1);
+  position: absolute; left: 0; top: 0; width: 0; height: 0;
+  transform-style: preserve-3d;
+  transform:
+    translate3d(
+      calc(var(--x) * 1px + (1 - var(--l)) * var(--fx) * 1px),
+      calc(var(--y) * 1px + (1 - var(--l)) * var(--fy) * 1px),
+      calc((1 - var(--l)) * 340px))
+    rotateZ(calc((1 - var(--l)) * var(--rz) * 1deg));
 }
-.p-body {
-  --l: clamp(0, calc((var(--p) - 0.18) / 0.24), 1);
-  transform: translate3d(0, 0, calc((1 - var(--l)) * 320px)) rotateZ(calc((1 - var(--l)) * -90deg));
-}
-.p-arm-l {
-  --l: clamp(0, calc((var(--p) - 0.38) / 0.22), 1);
-  transform: translate3d(calc((1 - var(--l)) * -200px), calc((1 - var(--l)) * -160px), calc((1 - var(--l)) * 300px))
-    translate(-24px, -24px) rotate(-33.7deg) rotate(calc((1 - var(--l)) * -70deg));
-}
-.p-arm-r {
-  --l: clamp(0, calc((var(--p) - 0.5) / 0.22), 1);
-  transform: translate3d(calc((1 - var(--l)) * 200px), calc((1 - var(--l)) * -160px), calc((1 - var(--l)) * 300px))
-    translate(24px, -24px) rotate(33.7deg) rotate(calc((1 - var(--l)) * 70deg));
-}
-.p-stem {
-  --l: clamp(0, calc((var(--p) - 0.62) / 0.22), 1);
-  transform: translate3d(0, calc((1 - var(--l)) * 220px), calc((1 - var(--l)) * 300px))
-    translate(0, 37px) rotate(calc((1 - var(--l)) * 90deg));
+.gl {
+  display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 800; font-size: 76px; line-height: 1;
+  font-style: normal; user-select: none;
 }
 
 /* Attivo solo quando lo script è pronto: la Y resta ferma mentre scorri */
@@ -222,7 +222,7 @@ a:hover { color: var(--ink); }
   .hero.is-live .hero-copy { position: sticky; top: 6rem; }
 }
 @media (max-width: 819px) {
-  .y3d { width: min(100%, 300px); --s: 0.62; }
+  .y3d { width: min(100%, 300px); --s: 0.7; }
   .hero.is-live .y-track { height: 260vh; }
   .hero.is-live .y3d { top: max(1rem, calc((100vh - 300px) / 2)); }
 }

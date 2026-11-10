@@ -22,39 +22,52 @@
   var model = host && host.querySelector(".y3d-model");
 
   if (host && scene && yTrack && model) {
-    // Ogni pezzo è una pila di strati arrotondati (estrusione).
-    var PARTS = [
-      { cls: "p-base",  w: 276, h: 276, r: 56, z0: 0,  z1: 20, n: 10, color: "#0F3D2E", top: "#0F3D2E" },
-      { cls: "p-body",  w: 236, h: 236, r: 46, z0: 20, z1: 62, n: 16, color: "#166534", top: "#A8D5BA" },
-      { cls: "p-arm-l", w: 16,  h: 90,  r: 7,  z0: 62, z1: 76, n: 6,  color: "#0F3D2E", top: "#0F3D2E" },
-      { cls: "p-arm-r", w: 16,  h: 90,  r: 7,  z0: 62, z1: 76, n: 6,  color: "#0F3D2E", top: "#0F3D2E" },
-      { cls: "p-stem",  w: 16,  h: 52,  r: 7,  z0: 62, z1: 76, n: 6,  color: "#0F3D2E", top: "#0F3D2E" }
-    ];
+    // Sei tasti (Y O U S E F) in griglia 3x2. Ogni tasto è una pila di strati arrotondati.
+    var WORD = "YOUSEF";
+    var COLS = 3;
+    var PITCH = 140;
+    var SPIN = [-80, 70, -60, 90, -70, 80];
     var canMix = !!(window.CSS && CSS.supports && CSS.supports("background", "color-mix(in srgb, red, blue 10%)"));
+    var shade = function (color, pct) {
+      return canMix ? "color-mix(in srgb, " + color + ", #F9FCF8 " + Math.round(pct) + "%)" : color;
+    };
 
-    PARTS.forEach(function (p) {
-      var part = document.createElement("div");
-      part.className = "part " + p.cls;
-      for (var i = 0; i < p.n; i++) {
-        var t = p.n === 1 ? 1 : i / (p.n - 1);
-        var layer = document.createElement("i");
-        layer.className = "ly";
-        layer.style.width = p.w + "px";
-        layer.style.height = p.h + "px";
-        layer.style.marginLeft = -p.w / 2 + "px";
-        layer.style.marginTop = -p.h / 2 + "px";
-        layer.style.borderRadius = p.r + "px";
-        layer.style.transform = "translateZ(" + (p.z0 + (p.z1 - p.z0) * t).toFixed(2) + "px)";
-        layer.style.background = p.color;
-        if (i === p.n - 1) {
-          layer.style.background = p.top;
-        } else if (canMix) {
-          layer.style.background =
-            "color-mix(in srgb, " + p.color + ", #F9FCF8 " + Math.round(t * 16) + "%)";
+    var stack = function (parent, o) {
+      for (var i = 0; i < o.n; i++) {
+        var t = o.n === 1 ? 1 : i / (o.n - 1);
+        var layer = document.createElement(o.text ? "span" : "i");
+        layer.className = "ly" + (o.text ? " gl" : "");
+        layer.style.width = o.w + "px";
+        layer.style.height = o.h + "px";
+        layer.style.marginLeft = -o.w / 2 + "px";
+        layer.style.marginTop = -o.h / 2 + "px";
+        layer.style.transform = "translateZ(" + (o.z0 + (o.z1 - o.z0) * t).toFixed(2) + "px)";
+        if (o.text) {
+          layer.textContent = o.text;
+          layer.style.color = i === o.n - 1 ? o.top : shade(o.color, t * 22);
+        } else {
+          layer.style.borderRadius = o.r + "px";
+          layer.style.background = i === o.n - 1 ? o.top : shade(o.color, t * 16);
         }
-        part.appendChild(layer);
+        parent.appendChild(layer);
       }
-      model.appendChild(part);
+    };
+
+    WORD.split("").forEach(function (ch, i) {
+      var col = i % COLS;
+      var row = Math.floor(i / COLS);
+      var key = document.createElement("div");
+      key.className = "key3d";
+      key.style.setProperty("--x", (col - (COLS - 1) / 2) * PITCH);
+      key.style.setProperty("--y", (row - 0.5) * PITCH);
+      key.style.setProperty("--fx", (col - 1) * 260);
+      key.style.setProperty("--fy", row ? 240 : -240);
+      key.style.setProperty("--rz", SPIN[i]);
+      key.style.setProperty("--st", (i * 0.13).toFixed(2));
+      stack(key, { w: 128, h: 128, r: 28, z0: 0,  z1: 12, n: 6, color: "#0F3D2E", top: "#0F3D2E" });
+      stack(key, { w: 112, h: 112, r: 22, z0: 12, z1: 38, n: 9, color: "#166534", top: "#A8D5BA" });
+      stack(key, { w: 112, h: 112, z0: 38, z1: 46, n: 5, color: "#0F3D2E", top: "#0F3D2E", text: ch });
+      model.appendChild(key);
     });
 
     host.classList.add("has-3d");
