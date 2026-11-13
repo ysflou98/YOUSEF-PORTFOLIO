@@ -1,0 +1,421 @@
+/* Yousef Loulid – stili del sito. Incolla in Aspetto > Personalizza > CSS aggiuntivo */
+:root {--header-h: 4.5rem;
+  --ink: #0f3d2e;
+  --deep: #166534;
+  --mid: #4c956c;
+  --line: #a8d5ba;
+  --tint: #e6f2ea;
+  --bg: #f9fcf8;
+  --ink-soft: #166534;
+  --radius: 14px;
+  --font: ui-sans-serif, "Avenir Next", "Segoe UI Variable Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Avenir Next", "Segoe UI Variable Display", "Trebuchet MS", ui-sans-serif, system-ui, sans-serif;
+  color-scheme: light;}
+#yl *, #yl *::before, #yl *::after {box-sizing: border-box;}
+html {scroll-behavior: smooth; -webkit-text-size-adjust: 100%;}
+#yl {margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 1.0625rem;
+  line-height: 1.65;}
+#yl h1, #yl h2, #yl h3 {font-family: var(--font-display);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.6em;}
+#yl h1 {font-size: clamp(2.25rem, 6vw, 4.1rem); max-width: 20ch;}
+#yl h2 {font-size: clamp(1.8rem, 4vw, 2.7rem); max-width: 22ch;}
+#yl h3 {font-size: 1.25rem; letter-spacing: -0.015em;}
+#yl p {margin: 0 0 1em; max-width: 62ch;}
+#yl ul, #yl ol {margin: 0; padding: 0;}
+#yl a {color: var(--deep); text-underline-offset: 0.2em; text-decoration-thickness: 0.08em;}
+#yl a:hover {color: var(--ink);}
+#yl :focus-visible {outline: 3px solid var(--deep); outline-offset: 3px; border-radius: 4px;}
+#yl .visually-hidden {position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;}
+#yl .skip-link {position: absolute;
+  left: 1rem; top: -4rem;
+  background: var(--ink);
+  color: var(--bg);
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  z-index: 60;}
+#yl .skip-link:focus {top: 1rem; color: var(--bg);}
+#yl .container {width: min(100% - 2.5rem, 1120px); margin-inline: auto;}
+#yl .key {display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.35rem;
+  background: var(--bg);
+  color: var(--ink);
+  font: inherit;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none;
+  border: 2px solid var(--ink);
+  border-radius: 12px;
+  box-shadow: 0 4px 0 var(--ink);
+  cursor: pointer;
+  transition: transform 0.08s ease, box-shadow 0.08s ease, background-color 0.15s ease, color 0.15s ease;}
+#yl .key:hover {background: var(--deep); color: var(--bg);}
+#yl .key:active {transform: translateY(4px); box-shadow: 0 0 0 var(--ink);}
+#yl .key--primary {background: var(--line);}
+#yl .key--small {padding: 0.5rem 1rem; font-size: 0.95rem; box-shadow: 0 3px 0 var(--ink);}
+#yl .key--small:active {transform: translateY(3px);}
+#yl .logo-face {fill: var(--face, var(--bg));}
+#yl .brand-logo {width: 2.4rem; height: 2.4rem; color: var(--ink); flex: none; overflow: visible;}
+#yl .brand-logo--key {--face: var(--line);}
+#yl .brand-logo--key .key-face {transition: transform 0.08s ease;}
+#yl .brand:hover .key-face {transform: translateY(-2px);}
+#yl .brand:active .key-face {transform: translateY(7px);}
+#yl .site-header {position: sticky; top: 0; z-index: 50; border-bottom: 2px solid var(--ink); background: var(--bg);}
+#yl .header-inner {display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  padding-block: 0.9rem;}
+#yl .brand {display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  color: var(--ink);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;}
+#yl .brand:hover {color: var(--ink);}
+#yl .main-nav {order: 3; width: 100%;}
+#yl .main-nav ul {display: flex; flex-wrap: wrap; gap: 0.25rem 1.4rem; list-style: none;}
+#yl .main-nav a {color: var(--ink); font-weight: 600; text-decoration: none; padding: 0.3rem 0; border-bottom: 2px solid transparent;}
+#yl .main-nav a:hover {border-bottom-color: var(--mid);}
+@media (max-width: 819px){
+#yl .header-inner {padding-block: 0.6rem; gap: 0.4rem 1rem;}
+#yl .main-nav ul {flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 1.1rem; padding-bottom: 0.1rem;}
+#yl .main-nav ul::-webkit-scrollbar {display: none;}
+#yl .main-nav a {white-space: nowrap;}
+}
+@media (min-width: 820px){
+#yl .main-nav {order: 0; width: auto; margin-left: auto;}
+}
+#yl .hero {position: relative;
+  color: var(--bg);
+  background:
+    radial-gradient(900px 560px at 76% 42%, rgba(76, 149, 108, 0.34), transparent 62%),
+    radial-gradient(760px 520px at 6% 105%, rgba(22, 101, 52, 0.55), transparent 60%),
+    linear-gradient(162deg, #0f3d2e 0%, #0a281e 52%, #05130d 100%);
+  overflow: clip;}
+#yl .hero::before {content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(168, 213, 186, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168, 213, 186, 0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+  -webkit-mask-image: radial-gradient(ellipse at 70% 45%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse at 70% 45%, #000 0%, transparent 72%);}
+#yl .hero :focus-visible {outline-color: var(--line);}
+#yl .hero-stage {position: relative;
+  min-height: calc(100vh - var(--header-h));
+  min-height: calc(100svh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 2.5rem 7rem;}
+#yl .hero-grid {display: grid; gap: 2rem; align-items: center;}
+#yl .hero-copy {position: relative; z-index: 2;}
+#yl .hero h1 {max-width: 16ch;
+  margin: 0 0 1.2rem;
+  color: var(--bg);
+  font-size: clamp(2.15rem, 5.4vw, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;}
+#yl .lead {max-width: 52ch; font-size: clamp(1rem, 1.5vw, 1.2rem); color: var(--line);}
+#yl .hero-actions {display: flex; flex-wrap: wrap; gap: 1rem 1.25rem; margin-top: 1.75rem;}
+#yl .hero .key {background: transparent;
+  color: var(--bg);
+  border-color: rgba(249, 252, 248, 0.75);
+  box-shadow: 0 4px 0 rgba(249, 252, 248, 0.22);}
+#yl .hero .key:hover {background: var(--bg); color: var(--ink); border-color: var(--bg);}
+#yl .hero .key:active {box-shadow: 0 0 0 transparent;}
+#yl .hero .key--primary {background: var(--line); color: var(--ink); border-color: var(--line); box-shadow: 0 4px 0 var(--mid);}
+#yl .hero .key--primary:hover {background: var(--bg); border-color: var(--bg);}
+#yl .hero-art {position: relative; z-index: 1;}
+#yl .y3d {position: relative;
+  width: min(100%, 440px);
+  aspect-ratio: 1;
+  margin-inline: auto;
+  perspective: 1200px;
+  --s: 1;}
+#yl .keys-fallback {list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.9rem; width: 100%; max-width: 340px; margin: 0 auto;}
+#yl .keys-fallback li {display: grid; place-items: center; aspect-ratio: 1;
+  background: var(--line); color: var(--ink);
+  border: 2px solid var(--bg); border-radius: 18px; box-shadow: 0 6px 0 var(--mid);
+  font: 800 clamp(2rem, 6vw, 3rem) var(--font-display);}
+#yl .y3d.has-3d .keys-fallback {display: none;}
+#yl .y3d-model {display: none;}
+#yl .y3d.has-3d .y3d-model {display: block;}
+#yl .y3d-model {--p: 1;
+  position: absolute;
+  left: 50%; top: 50%;
+  width: 0; height: 0;
+  transform-style: preserve-3d;
+  transform:
+    scale(var(--s, 1))
+    rotateY(calc(var(--mx, 0) * 9deg))
+    rotateX(calc(66deg - var(--p) * 34deg - var(--my, 0) * 7deg))
+    rotateZ(calc(-45deg + var(--p) * 45deg));}
+#yl .ly {position: absolute; left: 50%; top: 50%; display: block;}
+#yl .key3d {--l: clamp(0, calc((var(--p) - var(--st)) / 0.2), 1);
+  position: absolute; left: 0; top: 0; width: 0; height: 0;
+  transform-style: preserve-3d;
+  transform:
+    translate3d(
+      calc(var(--x) * 1px + (1 - var(--l)) * var(--fx) * 1px),
+      calc(var(--y) * 1px + (1 - var(--l)) * var(--fy) * 1px),
+      calc((1 - var(--l)) * 230px))
+    rotateZ(calc((1 - var(--l)) * var(--rz) * 1deg));}
+#yl .gl {display: grid; place-items: center;
+  font-family: var(--font-display); font-weight: 800; font-size: 76px; line-height: 1;
+  font-style: normal; user-select: none;}
+#yl .hero-ui {position: absolute;
+  left: 0; right: 0; bottom: 1.5rem;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;}
+#yl .hero-progress {display: flex; align-items: center; gap: 1rem; color: var(--line); font-weight: 700;}
+#yl .hp-count {font-size: 0.95rem; font-variant-numeric: tabular-nums; white-space: nowrap;}
+#yl .hp-num {color: var(--bg); font-size: 1.7rem; letter-spacing: -0.02em;}
+#yl .hp-bars {display: flex; gap: 0.4rem;}
+#yl .hp-bars i {position: relative; display: block; width: 2.6rem; height: 3px; background: rgba(168, 213, 186, 0.28);}
+#yl .hp-bars i::after {content: ""; position: absolute; inset: 0; background: var(--line); transform: scaleX(var(--f, 0)); transform-origin: left;}
+#yl .hp-bars i:first-child {--f: 1;}
+#yl .hp-label {min-width: 6.5rem; font-size: 0.95rem;}
+#yl .glass {width: min(100%, 320px);
+  padding: 1rem 1.15rem;
+  border-radius: 18px;
+  background: rgba(249, 252, 248, 0.08);
+  border: 1px solid rgba(168, 213, 186, 0.38);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  backdrop-filter: blur(16px) saturate(140%);
+  color: var(--bg);}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))){
+#yl .glass {background: rgba(15, 61, 46, 0.92);}
+}
+#yl .glass-status {display: flex; align-items: center; gap: 0.6rem; margin: 0; font-weight: 700; font-size: 0.95rem;}
+#yl .glass-status svg {width: 1.4rem; height: 1.4rem; flex: none; color: var(--line); overflow: visible; --face: transparent;}
+#yl .glass-project {display: block;
+  margin-top: 0.8rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid rgba(168, 213, 186, 0.3);
+  color: inherit;
+  text-decoration: none;}
+#yl .glass-project strong {display: block; font-size: 1.05rem;}
+#yl .glass-project span {display: block; color: var(--line); font-size: 0.9rem; line-height: 1.45;}
+#yl .glass-project:hover strong {text-decoration: underline; text-underline-offset: 0.2em;}
+@media (prefers-reduced-motion: no-preference){
+#yl .y3d.has-3d {animation: float 8s ease-in-out infinite;}
+#yl .glass {animation: float 9s ease-in-out -3s infinite;}
+}
+@keyframes float{50% { transform: translateY(-10px); }}
+#yl .hero.is-live {height: calc(100vh - var(--header-h) + 200vh); height: calc(100svh - var(--header-h) + 200vh);}
+#yl .hero.is-live .hero-stage {position: sticky; top: var(--header-h); height: calc(100vh - var(--header-h)); height: calc(100svh - var(--header-h)); min-height: 0;}
+@media (min-width: 820px){
+#yl .hero-grid {grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 3rem;}
+}
+@media (max-width: 819px){
+#yl .hero-stage {justify-content: flex-start; padding-block: 1.25rem 6.25rem;}
+#yl .hero-grid {gap: 0.25rem;}
+#yl .hero h1 {font-size: clamp(2rem, 9.5vw, 2.8rem); margin-bottom: 0.8rem;}
+#yl .lead {font-size: 0.98rem; line-height: 1.5; margin-bottom: 0;}
+#yl .hero-actions {margin-top: 1.1rem; gap: 0.7rem;}
+#yl .hero .key {padding: 0.6rem 1rem; font-size: 0.95rem;}
+#yl .y3d {width: min(100%, 300px); aspect-ratio: 1.35; --s: 0.66;}
+#yl .hp-bars i {width: 1.6rem;}
+#yl .hp-label {display: none;}
+}
+@media (max-width: 599px){
+#yl .glass-project {display: none;}
+#yl .glass {width: auto; padding: 0.7rem 0.9rem;}
+#yl .glass-status {font-size: 0.85rem;}
+#yl .hero-ui {bottom: 1rem;}
+}
+@media (max-width: 819px) and (max-height: 720px){
+#yl .hero-stage {padding-bottom: 3.5rem;}
+#yl .hero h1 {font-size: 1.95rem;}
+#yl .lead {font-size: 0.88rem;}
+#yl .y3d {width: min(100%, 230px); aspect-ratio: 1.5; --s: 0.5;}
+#yl .glass {display: none;}
+#yl .hero-ui {bottom: 0.75rem;}
+}
+#yl .section {padding-block: clamp(3rem, 7vw, 5.5rem); scroll-margin-top: var(--header-h);}
+#yl .section--band {background: var(--tint); border-block: 2px solid var(--ink);}
+#yl .section--dark {background: var(--ink); color: var(--tint);}
+#yl .section--dark h2 {color: var(--bg); margin-bottom: 2.25rem;}
+#yl .section--dark .card {color: var(--ink); border-color: var(--line); box-shadow: 0 5px 0 var(--mid);}
+#yl .section--dark :focus-visible {outline-color: var(--line);}
+#yl .section-intro {color: var(--ink-soft); font-size: 1.1rem; margin-bottom: 2.5rem;}
+#yl .grid {display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); list-style: none;}
+#yl .card {background: var(--tint);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  padding: 1.6rem;}
+#yl .section--band .card {background: var(--bg);}
+#yl .card p:last-child {margin-bottom: 0;}
+#yl .check-list {list-style: none; margin-top: 1rem;}
+#yl .check-list li {position: relative; padding-left: 1.5rem; margin-bottom: 0.4rem;}
+#yl .check-list li::before {content: "";
+  position: absolute;
+  left: 0.1rem; top: 0.7em;
+  width: 0.7rem; height: 0.35rem;
+  border-left: 3px solid var(--deep);
+  border-bottom: 3px solid var(--deep);
+  transform: rotate(-45deg) translateY(-50%);}
+#yl .yl-main {overflow-x: clip;}
+#yl .projects {display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));}
+#yl .project {display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: var(--bg);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 0 6px 0 var(--ink);
+  padding: 1.75rem;}
+#yl .project-meta {display: flex; justify-content: space-between; gap: 1rem; font-weight: 600; color: var(--ink-soft);}
+#yl .project h3 {font-size: clamp(1.5rem, 3vw, 2rem); margin: 0;}
+#yl .project p {margin: 0;}
+#yl .project .key {align-self: flex-start; margin-top: auto;}
+#yl .tags {display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none;}
+#yl .tags li {padding: 0.15rem 0.75rem; border: 2px solid var(--line); border-radius: 999px; font-size: 0.9rem; font-weight: 600; color: var(--ink-soft);}
+#yl .project--next {background: transparent; border-style: dashed; box-shadow: none; justify-content: center;}
+#yl .steps {list-style: none; display: grid; gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); counter-reset: step;}
+#yl .steps li {counter-increment: step;}
+#yl .steps h3::before {content: counter(step);
+  display: inline-grid;
+  place-items: center;
+  width: 2rem; height: 2rem;
+  margin-right: 0.6rem;
+  background: var(--line);
+  border: 2px solid var(--ink);
+  border-radius: 8px;
+  box-shadow: 0 2px 0 var(--ink);
+  font-size: 1rem;}
+#yl .about {display: grid; gap: 2rem;}
+@media (min-width: 820px){
+#yl .about {grid-template-columns: 1fr 1fr; gap: 4rem;}
+}
+#yl .area {font-weight: 600;}
+#yl .faq {display: grid; gap: 1rem; max-width: 760px;}
+#yl .faq details {background: var(--tint); border: 2px solid var(--ink); border-radius: var(--radius);}
+#yl .faq summary {cursor: pointer; padding: 1rem 1.3rem; font-weight: 700; list-style: none; display: flex; justify-content: space-between; gap: 1rem;}
+#yl .faq summary::-webkit-details-marker {display: none;}
+#yl .faq summary::after {content: "+"; font-size: 1.4rem; line-height: 1;}
+#yl .faq details[open] summary::after {content: "–";}
+#yl .faq details p {padding: 0 1.3rem 1.2rem; margin: 0; color: var(--ink-soft);}
+#yl .contact {display: grid; gap: 2.5rem;}
+@media (min-width: 820px){
+#yl .contact {grid-template-columns: 1fr 1.2fr; gap: 4rem;}
+}
+#yl address {font-style: normal;}
+#yl .contact-list {list-style: none; margin: 1.5rem 0;}
+#yl .contact-list li {margin-bottom: 0.6rem;}
+#yl .contact-list strong {display: block; font-size: 0.95rem; color: var(--ink-soft); font-weight: 600;}
+#yl .form {display: grid; gap: 1.1rem; background: var(--bg); border: 2px solid var(--ink); border-radius: var(--radius); padding: 1.75rem; box-shadow: 0 6px 0 var(--ink);}
+#yl .field {display: grid; gap: 0.35rem;}
+#yl .field label {font-weight: 700;}
+#yl .field input[type="text"], #yl .field input[type="email"], #yl .field textarea {width: 100%;
+  padding: 0.7rem 0.9rem;
+  font: inherit;
+  color: var(--ink);
+  background: var(--tint);
+  border: 2px solid var(--ink);
+  border-radius: 10px;}
+#yl .field textarea {min-height: 9rem; resize: vertical;}
+#yl .field input:focus-visible, #yl .field textarea:focus-visible {outline: 3px solid var(--deep); outline-offset: 2px; background: var(--bg);}
+#yl .field input:user-invalid, #yl .field textarea:user-invalid {border-color: #b3261e;}
+#yl .check {display: flex; gap: 0.7rem; align-items: flex-start; font-size: 0.95rem;}
+#yl .check input {width: 1.2rem; height: 1.2rem; margin-top: 0.25rem; accent-color: var(--deep); flex: none;}
+#yl .form .key {justify-self: start;}
+#yl .form-status {margin: 0; font-weight: 600; color: var(--deep);}
+#yl .form-status:empty {display: none;}
+#yl .site-footer {background: var(--ink); color: var(--tint); padding-block: 2.5rem;}
+#yl .site-footer a {color: var(--bg);}
+#yl .site-footer a:hover {color: var(--line);}
+#yl .site-footer :focus-visible {outline-color: var(--line);}
+#yl .footer-inner {display: flex; flex-wrap: wrap; gap: 1.5rem 3rem; justify-content: space-between; align-items: flex-start;}
+#yl .footer-inner p {margin: 0 0 0.3rem;}
+#yl .footer-nav ul {list-style: none; display: flex; flex-wrap: wrap; gap: 0.4rem 1.4rem;}
+#yl .footer-brand {display: inline-flex; align-items: center; gap: 0.6rem; font-family: var(--font-display); font-weight: 800; color: var(--bg); text-decoration: none; margin-bottom: 0.6rem;}
+#yl .footer-brand .brand-logo {color: var(--bg);}
+#yl .footer-brand .logo-face {fill: transparent;}
+#yl .prose {padding-block: clamp(2.5rem, 6vw, 4.5rem);}
+#yl .prose h1 {max-width: none;}
+#yl .prose h2 {font-size: 1.5rem; margin-top: 2.2rem; max-width: none;}
+#yl .prose p, #yl .prose li {max-width: 68ch;}
+#yl .prose ul {padding-left: 1.3rem; margin-bottom: 1em;}
+#yl .marquee {background: var(--line);
+  color: var(--ink);
+  border-block: 2px solid var(--ink);
+  overflow: hidden;}
+#yl .marquee-track {display: flex;
+  width: max-content;
+  animation: marquee 60s linear infinite;}
+#yl .marquee:hover .marquee-track, #yl .marquee:focus-within .marquee-track {animation-play-state: paused;}
+#yl .marquee-list {display: flex;
+  flex: none;
+  align-items: center;
+  gap: 2.5rem;
+  list-style: none;
+  padding: 1rem 2.5rem 1rem 0;
+  margin: 0;}
+#yl .marquee-list li {display: flex; align-items: center; gap: 0.8rem; white-space: nowrap; font-weight: 700; font-size: 1.05rem;}
+#yl .mq-key {width: 1.5rem; height: 1.5rem; flex: none; color: var(--ink); --face: var(--bg);}
+@keyframes marquee{to { transform: translateX(-50%); }}
+#yl .card, #yl .project, #yl .faq details {transition: transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease, border-color 0.25s ease;}
+@media (hover: hover){
+#yl .card:hover {transform: translateY(-8px); background: var(--line); box-shadow: 0 8px 0 var(--ink);}
+#yl .section--band .card:hover {background: var(--line);}
+#yl .section--dark .card:hover {box-shadow: 0 13px 0 var(--mid);}
+#yl .project:hover {transform: translateY(-8px); box-shadow: 0 14px 0 var(--ink);}
+#yl .project--next:hover {background: var(--tint); border-style: solid; box-shadow: 0 8px 0 var(--ink);}
+#yl .faq details:hover {transform: translateX(6px); background: var(--line); box-shadow: -6px 0 0 var(--ink);}
+}
+#yl .js-reveal [data-reveal]:not(.is-in) {opacity: 0;}
+#yl .js-reveal [data-reveal].is-in {animation: in-from-left 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;}
+#yl .js-reveal [data-reveal="right"].is-in {animation-name: in-from-right;}
+@keyframes in-from-left{from { opacity: 0; transform: translateX(-110px); }}
+@keyframes in-from-right{from { opacity: 0; transform: translateX(110px); }}
+@media (prefers-reduced-motion: reduce){
+html {scroll-behavior: auto;}
+#yl .marquee-track {animation: none; width: auto;}
+#yl .marquee-list {flex: 1 1 auto; flex-wrap: wrap; padding: 1rem 1.25rem; row-gap: 0.6rem;}
+#yl .marquee-list[aria-hidden="true"] {display: none;}
+#yl .marquee-list li {white-space: normal;}
+#yl .key, #yl .brand-logo--key .key-face {transition: none;}
+}
+#yl .prose address {font-style: normal; line-height: 1.8; margin-bottom: 1em; padding: 1rem 1.25rem; background: var(--tint); border: 2px solid var(--line); border-radius: 16px; max-width: 68ch;}
+#yl .prose .eyebrow {font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--deep); margin-bottom: .5rem;}
+#yl .prose .key + .key {margin-left: .75rem;}
+@media (max-width: 599px){
+#yl .prose .key + .key {margin-left: 0; margin-top: .75rem;}
+}
+
+/* Dentro WordPress: nascondi l'eventuale titolo della pagina e togli i margini del tema */
+#yl { margin: 0; padding: 0; }
+#yl .yl-main.prose { display: block; }
+#yl { max-width: none; width: 100%; float: none; clear: both; }
+#yl h1, #yl h2, #yl h3, #yl h4 { color: inherit; margin-top: 0; }
+#yl a { text-decoration-thickness: from-font; }
+#yl ul, #yl ol { margin-left: 0; }
+#yl .prose ul, #yl .prose.yl-main ul { margin-left: 0; }
