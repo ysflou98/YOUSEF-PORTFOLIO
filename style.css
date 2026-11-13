@@ -530,3 +530,11 @@ address { font-style: normal; }
   .marquee-list li { white-space: normal; }
   .key, .brand-logo--key .key-face { transition: none; }
 }
+
+/* Pagine legali e di errore */
+.prose address { font-style: normal; line-height: 1.8; margin-bottom: 1em; padding: 1rem 1.25rem; background: var(--tint); border: 2px solid var(--line); border-radius: 16px; max-width: 68ch; }
+.prose .eyebrow { font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--deep); margin-bottom: .5rem; }
+.prose .key + .key { margin-left: .75rem; }
+@media (max-width: 599px) { .prose .key + .key { margin-left: 0; margin-top: .75rem; } }
+body:has(> main.prose) { display: flex; flex-direction: column; min-height: 100vh; }
+body:has(> main.prose) > main.prose { flex: 1 0 auto; width: 100%; }
