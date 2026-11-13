@@ -29,10 +29,10 @@
   /* ---------- Y 3D che si compone scrollando ---------- */
   var host = document.getElementById("y3d");
   var scene = document.getElementById("y-scene");
-  var yTrack = document.getElementById("y-track");
+  var stage = scene && scene.querySelector(".hero-stage");
   var model = host && host.querySelector(".y3d-model");
 
-  if (host && scene && yTrack && model) {
+  if (host && scene && stage && model) {
     // Sei tasti (Y O U S E F) in griglia 3x2. Ogni tasto è una pila di strati arrotondati.
     var WORD = "YOUSEF";
     var COLS = 3;
@@ -71,11 +71,11 @@
       key.className = "key3d";
       key.style.setProperty("--x", (col - (COLS - 1) / 2) * PITCH);
       key.style.setProperty("--y", (row - 0.5) * PITCH);
-      key.style.setProperty("--fx", (col - 1) * 260);
-      key.style.setProperty("--fy", row ? 240 : -240);
+      key.style.setProperty("--fx", (col - 1) * 170);
+      key.style.setProperty("--fy", row ? 170 : -170);
       key.style.setProperty("--rz", SPIN[i]);
       key.style.setProperty("--st", (i * 0.13).toFixed(2));
-      stack(key, { w: 128, h: 128, r: 28, z0: 0,  z1: 12, n: 6, color: "#0F3D2E", top: "#0F3D2E" });
+      stack(key, { w: 128, h: 128, r: 28, z0: 0,  z1: 12, n: 6, color: "#4C956C", top: "#4C956C" });
       stack(key, { w: 112, h: 112, r: 22, z0: 12, z1: 38, n: 9, color: "#166534", top: "#A8D5BA" });
       stack(key, { w: 112, h: 112, z0: 38, z1: 46, n: 5, color: "#0F3D2E", top: "#0F3D2E", text: ch });
       model.appendChild(key);
@@ -84,20 +84,35 @@
     host.classList.add("has-3d");
 
     var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    var countEl = scene.querySelector(".hp-num");
+    var labelEl = scene.querySelector(".hp-label");
+    var bars = scene.querySelectorAll(".hp-bars i");
+    var LABELS = ["Design", "Sviluppo", "SEO locale"];
+
+    // Aggiorna scena 3D e indicatore 01 / 03 in base all'avanzamento (0-1)
+    var paint = function (p) {
+      model.style.setProperty("--p", p.toFixed(4));
+      var idx = p < 0.34 ? 0 : p < 0.67 ? 1 : 2;
+      if (countEl) countEl.textContent = "0" + (idx + 1);
+      if (labelEl) labelEl.textContent = LABELS[idx];
+      for (var b = 0; b < bars.length; b++) {
+        bars[b].style.setProperty("--f", Math.min(1, Math.max(0, p * 3 - b)).toFixed(3));
+      }
+    };
+
     if (reduce) {
-      model.style.setProperty("--p", "1");
+      paint(1);
     } else {
       scene.classList.add("is-live");
       var ticking = false;
 
       var update = function () {
         ticking = false;
-        var rect = yTrack.getBoundingClientRect();
-        var total = yTrack.offsetHeight - window.innerHeight;
-        var start = window.innerHeight * 0.12;
-        var p = total > 0 ? (start - rect.top) / (total + start) : 1;
-        p = Math.min(1, Math.max(0, p));
-        model.style.setProperty("--p", p.toFixed(4));
+        var barH = bar ? bar.offsetHeight : 0;
+        var rect = scene.getBoundingClientRect();
+        var total = scene.offsetHeight - stage.offsetHeight;
+        var p = total > 0 ? (barH - rect.top) / total : 1;
+        paint(Math.min(1, Math.max(0, p)));
       };
       var request = function () {
         if (!ticking) {
@@ -109,6 +124,30 @@
       window.addEventListener("scroll", request, { passive: true });
       window.addEventListener("resize", request);
       update();
+
+      // Parallax: i tasti si inclinano leggermente seguendo il mouse
+      var tx = 0, ty = 0, cx = 0, cy = 0, running = false;
+      var glide = function () {
+        cx += (tx - cx) * 0.08;
+        cy += (ty - cy) * 0.08;
+        model.style.setProperty("--mx", cx.toFixed(3));
+        model.style.setProperty("--my", cy.toFixed(3));
+        if (Math.abs(tx - cx) > 0.002 || Math.abs(ty - cy) > 0.002) {
+          window.requestAnimationFrame(glide);
+        } else {
+          running = false;
+        }
+      };
+      var kick = function () {
+        if (!running) { running = true; window.requestAnimationFrame(glide); }
+      };
+      scene.addEventListener("pointermove", function (event) {
+        if (event.pointerType === "touch") return;
+        tx = (event.clientX / window.innerWidth - 0.5) * 2;
+        ty = (event.clientY / window.innerHeight - 0.5) * 2;
+        kick();
+      });
+      scene.addEventListener("pointerleave", function () { tx = 0; ty = 0; kick(); });
     }
   }
 
